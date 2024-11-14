@@ -1,0 +1,406 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Более дружелюбный шрифт */
+    background-color: #f0f8ff;
+    height: 100vh;
+    overflow: hidden; /* Предотвращает прокрутку */
+    position: relative;
+}
+
+/* Логотип школы */
+#school-logo {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 250px; /* Регулируйте размер по необходимости */
+    height: auto;
+    z-index: 4; /* Обеспечивает отображение поверх всех экранов */
+}
+
+/* Общие стили для экранов */
+.screen {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: fixed; /* Фиксированное позиционирование */
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Базовый z-index */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Фон для главного меню */
+#main-menu {
+    background-image: url('images/background-menu.jpg'); /* Замените на ваше изображение */
+    z-index: 1;
+}
+
+/* Фон для игрового экрана */
+#game-screen {
+    background-image: url('images/background-game.jpg'); /* Замените на ваше изображение */
+    z-index: 2;
+}
+
+/* Фон для экрана окончания игры */
+#game-over {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    z-index: 3; /* Самый высокий z-index */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Скрытие элементов */
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Заголовки */
+h1, h2 {
+    margin-bottom: 20px;
+    color: #ff69b4; /* Яркий цвет для заголовков */
+    text-shadow: 2px 2px 4px #000;
+}
+
+#main-menu h1 {
+    font-size: 60px; /* Увеличен размер заголовка */
+    margin-bottom: 40px; /* Отступ снизу */
+}
+
+/* Кнопка переключения раскладки */
+.toggle-layout {
+    position: absolute;
+    top: 20px; /* Расположение относительно главного меню */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 16px 32px;
+    font-size: 32px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #1e90ff; /* Синий цвет кнопки */
+    color: #fff;
+    transition: background-color 0.3s;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 2; /* Чтобы кнопка была поверх таблиц рекордов */
+}
+
+.toggle-layout:hover {
+    background-color: #1c86ee; /* Более тёмный оттенок при наведении */
+}
+
+/* Основное содержимое главного меню */
+.main-menu-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+    position: relative;
+}
+
+/* Секция выбора сложности */
+.difficulty-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Кнопки выбора сложности */
+.difficulty-buttons {
+    display: flex;
+    flex-direction: row; /* Горизонтальное расположение */
+    justify-content: center;
+    align-items: center;
+}
+
+.difficulty-buttons button {
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff69b4; /* Яркие кнопки */
+    color: #fff;
+    transition: background-color 0.3s;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.difficulty-buttons button:hover {
+    background-color: #ff1493; /* Более тёмный оттенок при наведении */
+}
+
+/* Секция таблиц рекордов */
+.leaderboard-section {
+    flex: 0 0 20%; /* Ограничение ширины до 20% */
+    margin-left: 20px; /* Небольшой отступ слева */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    right: -100px; /* Размещение на самом правом краю */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Заголовок таблицы рекордов */
+.leaderboard-section h2 {
+    font-size: 36px; /* Уменьшен размер заголовка рекордов */
+    margin-bottom: 15px;
+    text-align: center;
+    color: #ff1493;
+}
+
+/* Каждая таблица рекордов */
+.leaderboard {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Заголовок уровня сложности в таблице рекордов */
+.leaderboard h3 {
+    font-size: 18px; /* Уменьшен размер заголовка уровня сложности */
+    margin-bottom: 8px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Список рекордов */
+.leaderboard ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.leaderboard ul li {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 3px 0;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 16px; /* Уменьшен размер шрифта */
+    text-align: center;
+}
+
+/* Информация о игре */
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 36px; /* Увеличен размер шрифта для очков */
+    width: 80%;
+    max-width: 800px;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Кнопка выхода */
+.exit-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #1e90ff;
+    border-radius: 8px;
+}
+
+.exit-button:hover {
+    background-color: #1c86ee;
+}
+
+/* Игровая область */
+#game-area {
+    position: relative;
+    width: 1000px; /* Расширено игровое поле по горизонтали */
+    height: 600px; /* Увеличена высота для лучшего отображения */
+    border: 2px solid #000;
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Стиль персонажей */
+.character {
+    position: absolute;
+    transform: translateY(-50%);
+    width: 80px; /* Увеличен размер изображений персонажей */
+    height: 80px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    user-select: none;
+}
+
+/* Стиль букв на персонажах */
+.character span {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+    color: #ffff00; /* Яркий цвет для букв */
+    font-weight: bold;
+    font-size: 36px; /* Увеличен размер букв */
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Экран окончания игры */
+#game-over h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#game-over p {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Кнопки на экране окончания игры */
+#game-over button {
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff69b4; /* Яркие кнопки */
+    color: #fff;
+    transition: background-color 0.3s;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+#game-over button:hover {
+    background-color: #ff1493; /* Более тёмный оттенок при наведении */
+}
+
+/* Кнопка сброса рекордов */
+.reset-button {
+    padding: 8px 16px;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #dc143c; /* Красный цвет для кнопки сброса */
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #c11b17;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 1200px) {
+    .main-menu-content {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .leaderboard-section {
+        flex: 0 0 20%; /* Сохраняем 20% ширины */
+        margin-left: 20px; /* Дополнительное уменьшение отступа */
+        position: absolute;
+        right: 10px; /* Небольшой отступ от правого края */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #game-area {
+        width: 90%;
+        height: 500px;
+    }
+
+    .game-info {
+        width: 90%;
+        font-size: 28px;
+    }
+
+    .character {
+        width: 60px;
+        height: 60px;
+    }
+
+    .character span {
+        font-size: 28px;
+    }
+
+    .leaderboard-section ul li {
+        font-size: 14px; /* Дополнительное уменьшение размера шрифта */
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        padding: 20px;
+    }
+
+    .main-menu-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .leaderboard-section {
+        margin-left: 0;
+        width: 100%;
+        position: static;
+        transform: none;
+    }
+
+    #game-area {
+        width: 100%;
+        height: 400px;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 24px;
+    }
+
+    .character {
+        width: 50px;
+        height: 50px;
+    }
+
+    .character span {
+        font-size: 24px;
+    }
+
+    .difficulty-buttons button,
+    #restart-button,
+    #menu-button,
+    #exit-button,
+    .reset-button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    .leaderboard-section h2 {
+        font-size: 22px;
+    }
+
+    .leaderboard-section .leaderboard h3 {
+        font-size: 18px;
+    }
+
+    .leaderboard-section .leaderboard ul li {
+        font-size: 14px;
+    }
+}

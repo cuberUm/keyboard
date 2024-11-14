@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тренажер клавиатуры</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Логотип школы -->
+    <img src="images/school-logo.png" alt="Логотип школы" id="school-logo">
+
+    <!-- Главное меню -->
+    <div id="main-menu" class="screen">
+        <h1>Тренажер клавиатуры</h1>
+        <!-- Кнопка переключения раскладки -->
+        <button id="toggle-layout" class="toggle-layout">RUS</button>
+        <div class="main-menu-content">
+            <!-- Секция выбора сложности -->
+            <div class="difficulty-section">
+                <div class="difficulty-buttons">
+                    <button data-difficulty="easy">Лёгкий</button>
+                    <button data-difficulty="medium">Средний</button>
+                    <button data-difficulty="hard">Сложный</button>
+                </div>
+            </div>
+            <!-- Секция таблицы рекордов -->
+            <div class="leaderboard-section">
+                <h2>Рекорды</h2>
+                <div class="leaderboard" data-difficulty="easy">
+                    <h3>Лёгкий</h3>
+                    <ul>
+                        <!-- Самый высокий счёт будет добавлен через JS -->
+                    </ul>
+                </div>
+                <div class="leaderboard" data-difficulty="medium">
+                    <h3>Средний</h3>
+                    <ul>
+                        <!-- Самый высокий счёт будет добавлен через JS -->
+                    </ul>
+                </div>
+                <div class="leaderboard" data-difficulty="hard">
+                    <h3>Сложный</h3>
+                    <ul>
+                        <!-- Самый высокий счёт будет добавлен через JS -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Кнопка сброса рекордов (опционально) -->
+        <button id="reset-leaderboard" class="reset-button">Сбросить рекорды</button>
+    </div>
+
+    <!-- Игровой экран -->
+    <div id="game-screen" class="screen hidden">
+        <div class="game-info">
+            <span id="score">Счет: 0</span>
+            <span id="lives">Жизни: 3</span>
+            <!-- Кнопка выхода в главное меню для лёгкого режима -->
+            <button id="exit-button" class="exit-button hidden">В главное меню</button>
+        </div>
+        <div id="game-area"></div>
+    </div>
+
+    <!-- Экран окончания игры -->
+    <div id="game-over" class="screen hidden">
+        <h2>Игра окончена</h2>
+        <p id="final-score">Ваш счёт: 0</p>
+        <button id="restart-button">Начать заново</button>
+        <button id="menu-button">В главное меню</button>
+    </div>
+
+    <!-- Аудио элементы -->
+    <audio id="menu-music" src="sounds/menu-music.mp3" loop></audio>
+    <audio id="game-music" src="sounds/game-music.mp3" loop></audio>
+    <audio id="destroy-sound" src="sounds/destroy-sound.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
