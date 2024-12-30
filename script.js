@@ -80,6 +80,7 @@ function startGame(difficulty) {
     menuMusic.pause();
     gameMusic.currentTime = 0;
     gameMusic.play();
+    gameMusic.volume = 0.5;
 
     // Очистка игрового поля перед началом
     clearGameArea();
@@ -108,6 +109,7 @@ function endGame() {
     gameMusic.pause();
     menuMusic.currentTime = 0;
     menuMusic.play();
+    menuMusic.volume = 0.5;
 
     // Скрытие кнопки "В главное меню" на экране окончания игры в лёгком режиме
     if (currentDifficulty === 'easy') {
@@ -239,6 +241,7 @@ menuButton.addEventListener('click', () => {
     gameMusic.pause();
     menuMusic.currentTime = 0;
     menuMusic.play();
+    menuMusic.volume = 0.5;
 
     // Очистка экрана окончания игры
     finalScore.textContent = `Ваш счёт: 0`;
@@ -261,6 +264,7 @@ exitButton.addEventListener('click', () => {
     gameMusic.pause();
     menuMusic.currentTime = 0;
     menuMusic.play();
+    menuMusic.volume = 0.5;
 
     // Убираем всех персонажей
     clearGameArea();
@@ -326,6 +330,7 @@ window.onload = () => {
 
     mainMenu.classList.remove('hidden');
     menuMusic.play();
+    menuMusic.volume = 0.5;
     displayLeaderboards();
 };
 
