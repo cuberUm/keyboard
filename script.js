@@ -31,7 +31,7 @@ let isGameOver = false;
 const difficulties = {
     easy: { speed: 1, spawnRate: 2000, lives: Infinity },
     medium: { speed: 1, spawnRate: 1500, lives: 3 },
-    hard: { speed: 1.5, spawnRate: 1000, lives: 2 }
+    hard: { speed: 1, spawnRate: 1000, lives: 2 }
 };
 
 // Массив изображений персонажей
